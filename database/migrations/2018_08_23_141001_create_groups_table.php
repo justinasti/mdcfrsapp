@@ -15,7 +15,7 @@ class CreateGroupsTable extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 191);
+            $table->string('name');
             $table->integer('adviser')->unsigned();
             $table->timestamps();
 
@@ -32,8 +32,9 @@ class CreateGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::table('groups', function(Blueprint $table) {
+        Schema::table('groups', function (Blueprint $table) {
             $table->dropForeign('groups_adviser_foreign');
+            
             $table->dropIndex('groups_adviser_index');
         });
         Schema::dropIfExists('groups');

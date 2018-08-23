@@ -15,8 +15,8 @@ class CreateFacilitiesTable extends Migration
     {
         Schema::create('facilities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 100);
-            $table->string('description', 191);
+            $table->string('name');
+            $table->string('description');
             $table->integer('capacity');
             $table->integer('managed_by')->unsigned();
             $table->timestamps();
@@ -34,11 +34,11 @@ class CreateFacilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::table('facilities', function(Blueprint $table) {
+        Schema::table('facilities', function (Blueprint $table) {
             $table->dropForeign('facilities_managed_by_foreign');
+
             $table->dropIndex('facilities_managed_by_index');
         });
-
         Schema::dropIfExists('facilities');
     }
 }
